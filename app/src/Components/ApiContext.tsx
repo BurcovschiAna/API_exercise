@@ -42,7 +42,17 @@ export const ApiProvider = ({ children }: { children: ReactNode }) => {
         setSelectedItem(item);
     }
     const deleteItem = (id:number) => {
-
+        fetch(`https://fakestoreapi.com/products/${id}`, {
+            method: "DELETE",
+        })
+        .then(response => {
+            if (response.ok) {
+                setItems(prevItems => prevItems ? prevItems.filter(item => item.id !== id) : null);
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
     }
     return (
         <ApiContext.Provider value={{items, loading,  getItem, deleteItem, selectedItem}}>
