@@ -1,4 +1,7 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, useContext} from "react";
+import Form from "./Components/Form.js";
+import List from "./Components/List.js";
+import { ApiContext } from "./Components/ApiContext.js";
 import { Hourglass } from 'ldrs/react'
 import 'ldrs/react/Hourglass.css'
 import "./App.css"
@@ -9,95 +12,35 @@ type ItemType = {
   description: string;
   image: string;
 };
+type ApiContextType = {
+    items: ItemType[] | null,
+    loading: boolean,
+    getItem: (id: number) => void,
+    deleteItem: (id: number) => void,
+    selectedItem: ItemType | null,
+}
 
 export default function App() {
-  const [items, setItems] = useState<ItemType[] | null>(null); 
-  const [loading, setLoading] = useState<boolean>(true);
-  const [newItem, setNewItem] = useState<[] | null>(null);
-  const [selectedItem, setSelectedItem] = useState<ItemType | null>(null)
+    const { loading, getItem, deleteItem, selectedItem } = useContext(ApiContext) as ApiContextType;
 
-  const fetchItems = () => {
-    fetch('https://fakestoreapi.com/products')
-      .then(response => response.json())
-      .then(json => {
-        setItems(json);
-        setLoading(false)
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  };
 
-  useEffect(() => {
-    fetchItems();
-  }, []); 
-  const getItem = (id:number) => {
-     const item = items?.find(item => item.id === id) || null;
-     setSelectedItem(item);
-  }
-  const deleteItem = (id:number) => {
-
-  }
   return (
+   
     <div className="container">
-      <form className="form-container">
-        <input type="text" />
-        <input type="text" />
-        <input type="text" />
-      </form>
+      <Form/>
       <div className="flex">
          {loading ? 
+         <div className="animation-container">
           <Hourglass
             size="50"
             bgOpacity="0.1"
             speed="1.75"
             color="#333446"/>
-          : 
-          <div>
-            {
-              items?.map(item => (
-              <div className="item flex" key={item.id}>
-                <p className="title">
-                  {item.title}
-                </p>
-                <div className="flex">
-                  <div 
-                  className="btn"
-                  onClick={() => getItem(item.id)} >
-                    <a href="#">
-                      View
-                    </a>
-                    </div>
-                  <div 
-                  className="btn"
-                  onClick={() => deleteItem(item.id)}
-                  >Delete</div>
-                </div>
-              </div>
-          ))
-            }
-          </div>
-         }
-         <div className="selected-item-container">
-            {selectedItem ? 
-              <div className="selected-item">
-                <img src={selectedItem.image} alt="" />
-                <p>
-                  {selectedItem.title}
-                </p>
-                <p>
-                  {selectedItem.description}
-                </p>
-                <div className="btn">
-                  Price: {selectedItem.price}
-                </div>
-              </div>
-             : 
-              <div>
-                No item selected
-              </div>
-            }
          </div>
+          
+          : <List/>
+          }
+         
       </div>
       
       
