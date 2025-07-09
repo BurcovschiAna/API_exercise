@@ -10,8 +10,6 @@
     <li><a href="#project-structure">Project Structure</a></li>
     <li><a href="#how-to-run-the-project">How to Run the Project</a></li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
 </ul>
 
 <h2 id="features">Features</h2>
@@ -73,8 +71,8 @@
 <h2 id="how-to-run-the-project">How to Run the Project</h2>
 <ol>
     <li><strong>Clone the Repository</strong>:
-        <pre><code>git clone https://github.com/yourusername/item-management-app.git
-cd item-management-app</code></pre>
+        <pre><code>git clone https://github.com/BurcovschiAna/API_exercise.git
+cd app</code></pre>
     </li>
     <li><strong>Install Dependencies</strong>:
         Make sure you have Node.js installed. Then run:
@@ -82,7 +80,7 @@ cd item-management-app</code></pre>
     </li>
     <li><strong>Run the Application</strong>:
         After installing the dependencies, start the application with:
-        <pre><code>npm start</code></pre>
+        <pre><code>npm run dev</code></pre>
         This will start the development server and open the application in your default web browser.
     </li>
 </ol>
@@ -112,8 +110,3 @@ cd item-management-app</code></pre>
     </li>
 </ol>
 
-<h2 id="contributing">Contributing</h2>
-<p>Contributions are welcome! If you have suggestions for improvements or features, feel free to create an issue or submit a pull request.</p>
-
-<h2 id="license">License</h2>
-<p>This project is licensed under the MIT License. See the <code>LICENSE</code> file for details.</p>
