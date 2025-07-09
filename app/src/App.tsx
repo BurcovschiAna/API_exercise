@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext} from "react";
+import {useContext} from "react";
 import Form from "./Components/Form.js";
 import List from "./Components/List.js";
 import { ApiContext } from "./Components/ApiContext.js";
@@ -21,14 +21,13 @@ type ApiContextType = {
 }
 
 export default function App() {
-    const { loading, getItem, deleteItem, selectedItem } = useContext(ApiContext) as ApiContextType;
+    const { loading } = useContext(ApiContext) as ApiContextType;
 
 
   return (
    
     <div className="container">
-      <Form/>
-      <div className="flex">
+      
          {loading ? 
          <div className="animation-container">
           <Hourglass
@@ -40,10 +39,7 @@ export default function App() {
           
           : <List/>
           }
-         
-      </div>
-      
-      
+       <Form/>
     </div>
   );
 }
