@@ -1,45 +1,32 @@
-import {useContext} from "react";
-import Form from "./Components/Form.js";
-import List from "./Components/List.js";
-import { ApiContext } from "./Components/ApiContext.js";
-import { Hourglass } from 'ldrs/react'
-import 'ldrs/react/Hourglass.css'
-import "./App.css"
-type ItemType = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-};
-type ApiContextType = {
-    items: ItemType[] | null,
-    loading: boolean,
-    getItem: (id: number) => void,
-    deleteItem: (id: number) => void,
-    selectedItem: ItemType | null,
-}
+import { useContext } from "react"; // Import necessary hooks from React
+import Form from "./Components/Form.js"; // Import the Form component
+import List from "./Components/List.js"; // Import the List component
+import { ApiContext, type ApiContextType } from "./Components/ApiContext.js"; // Import the API context
+import { Hourglass } from 'ldrs/react'; // Import the Hourglass component for loading animation
+import 'ldrs/react/Hourglass.css'; // Import CSS for the Hourglass component
+import "./App.css"; // Import custom styles for the App component
 
+
+// Define the main App component
 export default function App() {
+    // Use the context to access the loading state
     const { loading } = useContext(ApiContext) as ApiContextType;
 
-
-  return (
-   
-    <div className="container">
-      
-         {loading ? 
-         <div className="animation-container">
-          <Hourglass
-            size="50"
-            bgOpacity="0.1"
-            speed="1.75"
-            color="#333446"/>
-         </div>
-          
-          : <List/>
-          }
-       <Form/>
-    </div>
-  );
+    return (
+        <div className="container">
+            {/* Conditional rendering based on loading state */}
+            {loading ? 
+                <div className="animation-container">
+                    <Hourglass
+                        size="50" // Size of the hourglass
+                        bgOpacity="0.1" // Background opacity
+                        speed="1.75" // Animation speed
+                        color="#333446" // Color of the hourglass
+                    />
+                </div>
+                : <List/> // Render the List component when not loading
+            }
+            <Form/> {/* Always render the Form component */}
+        </div>
+    );
 }
