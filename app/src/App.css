@@ -140,11 +140,7 @@ body {
     font-size: 16px;
     display: block;
     width: 300px;
-    outline: none;
-    -webkit-appearance: none;/
-    -moz-appearance: none; 
-    -o-appearance: none;
-    -ms-appearance: none; 
+    outline: none; 
 }
 
 .input-item textarea {
